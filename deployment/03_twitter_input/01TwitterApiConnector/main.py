@@ -10,7 +10,7 @@ publisher = pubsub_v1.PublisherClient()
 PROJECT_ID = "crypto-sentiment-341504"
 
 # topic to publish to 
-topic_name = "twitter-response"
+topic_name = "twitter-to-bq"
 
 # Publishes a message to a Cloud Pub/Sub topic.
 def twitter_request_from_api(event, context):

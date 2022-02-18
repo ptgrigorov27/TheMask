@@ -1,11 +1,11 @@
 # Create PubSub topics and subscriptions 
 gcloud pubsub topics create twitter-trigger
-gcloud pubsub topics create twitter-response
-gcloud pubsub topics create twitter-parsed
+#gcloud pubsub topics create twitter-response
+#gcloud pubsub topics create twitter-parsed
 gcloud pubsub topics create twitter-to-bq
 gcloud pubsub subscriptions create twitter-trigger-sub --topic twitter-trigger
-gcloud pubsub subscriptions create twitter-response-sub --topic twitter-response
-gcloud pubsub subscriptions create twitter-parsed-sub --topic twitter-parsed
+#gcloud pubsub subscriptions create twitter-response-sub --topic twitter-response
+#gcloud pubsub subscriptions create twitter-parsed-sub --topic twitter-parsed
 gcloud pubsub subscriptions create twitter-to-bq-sub --topic twitter-to-bq
 
 # Deploy cloud functions 
@@ -15,13 +15,13 @@ gcloud pubsub subscriptions create twitter-to-bq-sub --topic twitter-to-bq
 cd 01TwitterApiConnector/
 sh deploy-cloud-function.sh
 
-cd ..
-cd 02TwitterApiParser/
-sh deploy-cloud-function.sh
+#cd ..
+#cd 02TwitterApiParser/
+#sh deploy-cloud-function.sh
 
-cd ..
-cd 03SentimentModel/
-sh deploy-cloud-function.sh
+#cd ..
+#cd 03SentimentModel/
+#sh deploy-cloud-function.sh
 
 
 # GCS bucket as a deployment location for the pubsub-to-bq dataflow
