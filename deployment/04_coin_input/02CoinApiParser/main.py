@@ -10,38 +10,34 @@ publisher = pubsub_v1.PublisherClient()
 PROJECT_ID = "crypto-sentiment-341504"
 
 # topic to publish to 
-topic_name = "twitter-parsed"
+topic_name = "coin-to-bq"
 
 
 
-def twitter_parse_message(event, context):
-
-    print(f'Publishing message to topic {topic_name}')
+# Publishes a message to a Cloud Pub/Sub topic.
+def coin_parse_message(event, context):
 
     # References an existing topic
     topic_path = publisher.topic_path(PROJECT_ID, topic_name)
 
-    # Get 'data' from the event (dict)
+    # Get 'data' from the pubsub event (dict)
     if 'data' in event:
-        message = base64.b64decode(event['data']).decode('utf-8')
+        input_message = base64.b64decode(event['data']).decode('utf-8')
     else: 
-        message = ""
+        input_message = ""
 
     # Create a with the data from the Pub/Sub message 
-    message_json = json.dumps({
-        'data': {'message': message}
+    output_message_json = json.dumps({
+        'message': input_message
     })
 
-    # TO BE DELETED
-    message_json = message
+    # TO BE DELETED (overrides the output_message_json with a valid output json)
+    output_message_json = input_message
 
-    message_bytes = message_json.encode('utf-8')
-      
-    print("Message:" + str(message))
-    print("message_json: " + str(message_json))
+    message_bytes = output_message_json.encode('utf-8')
 
-    # TO BE DELETED
-    #message_bytes = event['data']
+    print(f'Input message: {str(input_message)}')
+    print(f'Publishing message to topic {topic_name}: {output_message_json}')
 
     # Publishes a message
     try:
