@@ -1,5 +1,5 @@
 from config import ConfigClass
-
+from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 
 class GetTweets():
     def __init__(self):
@@ -18,7 +18,9 @@ class GetTweets():
         results = []
         if not twitter_search_dict.data is None and len(twitter_search_dict.data) > 0:
             for tweet in twitter_search_dict.data:
+                # Get Twitter Data from Twitter Object
                 tweet_user_id = {}
+                tweet_user_id['id'] = tweet.id
                 tweet_user_id['text'] = tweet.text
                 tweet_user_id['author_id'] = tweet.author_id
                 tweet_user_id['conversation_id'] = tweet.conversation_id
@@ -38,7 +40,22 @@ class GetTweets():
                         tweet_user_id['retweet_count'] = tweet.public_metrics['retweet_count']
                     if metric == 'quote_tweet':
                         tweet_user_id['quote_tweet'] = tweet.public_metrics['quote_count']
-                results.append(tweet_user_id)
-            return results
-        '''for result in results:
-            print(result)'''
+
+                # Get sentient value of each tweet
+                analyzer = SentimentIntensityAnalyzer()
+                sentient_dict = analyzer.polarity_scores(tweet.text)
+
+                # Put sentient score in tweet dictionary
+                for score in sentient_dict:
+                    if score == 'pos':
+                        tweet_user_id['Pos_Sentiment'] = sentient_dict['pos']
+                    if score == 'neg':
+                        tweet_user_id['Neg_Sentiment'] = sentient_dict['neg']
+                    if score == 'Neu':
+                        tweet_user_id['New_Sentiment'] = sentient_dict['neu']
+                    if score == 'compound':
+                        tweet_user_id['Compound_Sentiment'] = sentient_dict['compound']
+                print(tweet_user_id)
+                print('\n')
+        return results
+
