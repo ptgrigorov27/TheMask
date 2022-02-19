@@ -1,2 +1,3 @@
 # Files in this list will be ignored when deploying this directory to GCP
 001_deploy_twitter_import_stream.sh
+deploy-cloud-function.sh

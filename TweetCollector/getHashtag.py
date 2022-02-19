@@ -25,12 +25,9 @@ class GetTweets():
                 tweet_user_id['author_id'] = tweet.author_id
                 tweet_user_id['conversation_id'] = tweet.conversation_id
                 tweet_user_id['created_at'] = tweet.created_at
-                # tweet_user_id['latitude_coordinates'] = tweet.latitude_coordinate
-                # tweet_user_id['longitude_coordinate'] = tweet.longitude_coordinate
                 tweet_user_id['place_id'] = tweet.geo
                 tweet_user_id['in_reply_to_user_id'] = tweet.in_reply_to_user_id
                 tweet_user_id['lang'] = tweet.lang
-                # tweet_user_id['impression_count'] = tweet.impression_count
                 for metric in tweet.public_metrics:
                     if metric == 'reply_count':
                         tweet_user_id['reply_count'] = tweet.public_metrics['reply_count']
