@@ -5,12 +5,20 @@ bq mk crypto_sentiment
 
 # Create table
 bq mk --table \
-    --description "Temp table for testing purposes" \
-    crypto-sentiment-341504:crypto_sentiment.tmp \
-    "message:STRING,\
+    --description "This table contains tweets with extracted attributes and a computed sentiment score" \
+    crypto-sentiment-341504:crypto_sentiment.tweets_prepared \
+    "id:INT64,\
+    text:STRING,\
+    author_id:INT64,\
+    conversation_id:INT64,\
+    created_at:TIMESTAMP,\
+    place_id:STRING,\
+    in_reply_to_user_id:INT64,\
+    lang:STRING,\
+    retweet_count:INT64,\
+    reply_count:INT64,\
+    like_count:INT64,\
+    neg_Sentiment:FLOAT64,\
+    pos_Sentiment:FLOAT64,\
+    compound_Sentiment:FLOAT64,\
     ingest_timestamp:TIMESTAMP"
-
-
-
-# TODO: Add table creation
-# https://cloud.google.com/bigquery/docs/reference/bq-cli-reference
