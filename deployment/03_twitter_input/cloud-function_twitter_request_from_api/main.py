@@ -14,7 +14,7 @@ PROJECT_ID = "crypto-sentiment-341504"
 
 # topic to publish to 
 topic_name = "twitter-to-bq"
-max_results = 100
+max_results = 11
 query = '#bitcoin'
 
 # Publishes a message to a Cloud Pub/Sub topic.
