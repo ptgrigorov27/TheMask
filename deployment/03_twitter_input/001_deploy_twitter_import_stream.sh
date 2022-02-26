@@ -15,6 +15,9 @@ gsutil mb -p crypto-sentiment-341504 gs://crypto-sentiment-341504-twitter-to-bq-
 # deploying a predefined pubsub to bq dataflow template
 gcloud dataflow jobs run twitter-to-bq-dataflow \
     --gcs-location gs://dataflow-templates/latest/PubSub_Subscription_to_BigQuery \
+    --region=us-central1 \
+    --max-workers=1 \
+    --worker-machine-type=e2-standard-2 \
     --staging-location gs://crypto-sentiment-341504-twitter-to-bq-dataflow \
     --parameters \
     inputSubscription=projects/crypto-sentiment-341504/subscriptions/twitter-to-bq-sub,outputTableSpec=crypto-sentiment-341504:crypto_sentiment.tweets_prepared
