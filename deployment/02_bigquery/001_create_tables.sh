@@ -22,3 +22,18 @@ bq mk --table \
     pos_Sentiment:FLOAT64,\
     compound_Sentiment:FLOAT64,\
     ingest_timestamp:TIMESTAMP"
+
+bq mk --table \
+    --description "This table contains OHLCV (Open, High, Low, Close, Volume) bitcoin data from the Coin API" \
+    crypto-sentiment-341504:crypto_sentiment.bitcoin_ohlcv \
+    "time_period_start:TIMESTAMP, 
+    time_period_end:TIMESTAMP, 
+    time_open:TIMESTAMP, 
+    time_close:TIMESTAMP, 
+    price_open:FLOAT64, 
+    price_high:FLOAT64, 
+    price_low:FLOAT64, 
+    price_close:FLOAT64, 
+    volume_traded:FLOAT64, 
+    trades_count:INT64, 
+    ingest_timestamp:TIMESTAMP"

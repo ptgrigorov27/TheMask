@@ -1,2 +1,0 @@
-# Files in this list will be ignored when deploying this directory to GCP
-deploy-cloud-function.sh
