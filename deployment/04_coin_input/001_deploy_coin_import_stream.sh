@@ -13,10 +13,6 @@ gcloud pubsub subscriptions create coin-to-bq-sub --topic coin-to-bq
 cd 01CoinApiConnector/
 sh deploy-cloud-function.sh
 
-cd ..
-cd 02CoinApiParser/
-sh deploy-cloud-function.sh
-
 # GCS bucket as a deployment location for the pubsub-to-bq dataflow
 gsutil mb -p crypto-sentiment-341504 gs://crypto-sentiment-341504-coin-to-bq-dataflow
 
@@ -25,7 +21,7 @@ gcloud dataflow jobs run coin-to-bq-dataflow \
     --gcs-location gs://dataflow-templates/latest/PubSub_Subscription_to_BigQuery \
     --staging-location gs://crypto-sentiment-341504-coin-to-bq-dataflow \
     --parameters \
-    inputSubscription=projects/crypto-sentiment-341504/subscriptions/coin-to-bq-sub,outputTableSpec=crypto-sentiment-341504:crypto_sentiment.tmp
+    inputSubscription=projects/crypto-sentiment-341504/subscriptions/coin-to-bq-sub,outputTableSpec=crypto-sentiment-341504:crypto_sentiment.bitcoin_ohlcv
 
 # Use Cloud scheduler to trigger via pubsub
 gcloud scheduler jobs create pubsub coin-trigger-cloud-scheduler \
