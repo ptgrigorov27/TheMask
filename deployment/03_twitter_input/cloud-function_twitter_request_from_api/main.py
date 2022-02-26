@@ -23,6 +23,9 @@ def twitter_request_from_api(event, context):
     # References an existing topic
     topic_path = publisher.topic_path(PROJECT_ID, topic_name)
 
+    # get current timestamp so that all messages of this mini-batch are of the same timestamp
+    current_timestamp = str(context.timestamp)
+
     # # Get 'data' from the pubsub event (dict)
     # if 'data' in event:
     #     input_message = base64.b64decode(event['data']).decode('utf-8')
@@ -74,7 +77,7 @@ def twitter_request_from_api(event, context):
                     tweet_user_id['new_Sentiment'] = sentient_dict['neu']
                 if score == 'compound':
                     tweet_user_id['compound_Sentiment'] = sentient_dict['compound']
-            tweet_user_id['ingest_timestamp'] = str(context.timestamp)
+            tweet_user_id['ingest_timestamp'] = current_timestamp
 
             # Create a with the data from the Pub/Sub message 
             output_message_json = json.dumps(tweet_user_id)
@@ -88,7 +91,6 @@ def twitter_request_from_api(event, context):
             try:
                 publish_future = publisher.publish(topic_path, data=output_message_bytes)
                 publish_future.result()  # Verify the publish succeeded
-                #return 'Message published.'
             except Exception as e:
                 print(e)
                 return (e, 500)
