@@ -1,0 +1,4 @@
+# required pip packages
+google-cloud-pubsub==2.9.0
+tweepy
+vaderSentiment
