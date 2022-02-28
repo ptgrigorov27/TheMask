@@ -8,7 +8,6 @@ The directory `deployment` contains subdirectories with shell scripts for the de
 When testing the scripts and code on a new GCP setup, following adaptations are necessary: 
 * The names of most components (especially GCS buckets) need to be changed. 
 * The developer has to manually enable the GCP APIs for respective products (for example the BigQuery API, Pub/Sub API, ...)
-* A service account has to be created and set up to work with Pub/Sub. This step is documented in `documentation/002_pubsub_setup.md`
 
 
 
