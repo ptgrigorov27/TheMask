@@ -1,15 +1,10 @@
 # Create PubSub topics and subscriptions 
 gcloud pubsub topics create coin-trigger
-gcloud pubsub topics create coin-response
 gcloud pubsub topics create coin-to-bq
 gcloud pubsub subscriptions create coin-trigger-sub --topic coin-trigger
-gcloud pubsub subscriptions create coin-response-sub --topic coin-response
 gcloud pubsub subscriptions create coin-to-bq-sub --topic coin-to-bq
 
 # Deploy cloud functions 
-# (note that this looks cumbersome because the deployment script needs to be in the 
-# same directory as the CloudFunction code and because the CloudFunction needs be 
-# be named main.py)
 cd 01CoinApiConnector/
 sh deploy-cloud-function.sh
 
