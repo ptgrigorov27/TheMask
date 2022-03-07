@@ -3,34 +3,26 @@ import base64
 import json
 import os
 import tweepy
-from google.cloud import pubsub_v1
+from google.cloud import bigquery
 from datetime import datetime
 from config import ConfigClass
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 
-# Instantiates a Pub/Sub client
-publisher = pubsub_v1.PublisherClient()
+# Prepare the BigQuery Client
 PROJECT_ID = "crypto-sentiment-341504"
+BQ_DATASET = "crypto_sentiment"
+BQ_TABLE = "tweets_prepared"
+BQ = bigquery.Client()
 
-# topic to publish to 
-topic_name = "twitter-to-bq"
+# twitter query parameters
 max_results = 11
 query = '#bitcoin'
 
 # Publishes a message to a Cloud Pub/Sub topic.
 def twitter_request_from_api(event, context):
 
-    # References an existing topic
-    topic_path = publisher.topic_path(PROJECT_ID, topic_name)
-
     # get current timestamp so that all messages of this mini-batch are of the same timestamp
     current_timestamp = str(context.timestamp)
-
-    # # Get 'data' from the pubsub event (dict)
-    # if 'data' in event:
-    #     input_message = base64.b64decode(event['data']).decode('utf-8')
-    # else: 
-    #     input_message = ""
 
     client = ConfigClass.get_client()
     twitter_search_dict = client.search_recent_tweets(query,
@@ -79,19 +71,28 @@ def twitter_request_from_api(event, context):
                     tweet_user_id['compound_Sentiment'] = sentient_dict['compound']
             tweet_user_id['ingest_timestamp'] = current_timestamp
 
-            # Create a with the data from the Pub/Sub message 
-            output_message_json = json.dumps(tweet_user_id)
-
-            output_message_bytes = output_message_json.encode('utf-8')
-        
-            print(f'Input message: {str(tweet_user_id)}')
-            print(f'Publishing message to topic {topic_name}: {output_message_json}')
-
             # Publishes a message
             try:
-                publish_future = publisher.publish(topic_path, data=output_message_bytes)
-                publish_future.result()  # Verify the publish succeeded
+                insert_into_bigquery(tweet_user_id)
             except Exception as e:
                 print(e)
                 return (e, 500)
 
+def insert_into_bigquery(mydict):
+    table = BQ.dataset(BQ_DATASET).table(BQ_TABLE)
+    errors = BQ.insert_rows_json(table,
+                                 json_rows=[mydict])
+    if errors != []:
+        raise BigQueryError(errors)
+
+class BigQueryError(Exception):
+    '''Exception raised whenever a BigQuery error happened''' 
+    def __init__(self, errors):
+        super().__init__(self._format(errors))
+        self.errors = errors
+
+    def _format(self, errors):
+        err = []
+        for error in errors:
+            err.extend(error['errors'])
+        return json.dumps(err)

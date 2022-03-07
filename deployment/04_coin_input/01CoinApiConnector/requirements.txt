@@ -1,2 +1,2 @@
 # required pip packages
-google-cloud-pubsub==2.9.0
+google-cloud-bigquery
