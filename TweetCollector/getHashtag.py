@@ -1,3 +1,4 @@
+# Gabrielle Stoney
 from config import ConfigClass
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 
