@@ -1,3 +1,4 @@
+# Gabrielle Stoney, Khilna Rawal
 #from coinapi_rest_v1.restapi import CoinAPIv1
 from http.client import TOO_MANY_REQUESTS
 from operator import truediv
