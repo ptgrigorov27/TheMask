@@ -1,4 +1,5 @@
 # schedule query to predict every hour
+# Marian Marin, Marc Meier-Dornburg
 bq query \
     --use_legacy_sql=false \
     --destination_table=crypto_sentiment.model_output \
