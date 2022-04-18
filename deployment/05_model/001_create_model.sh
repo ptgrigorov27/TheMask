@@ -1,4 +1,5 @@
 # Create model
+# # Marian Marin, Marc Meier-Dornburg, Gabrielle Stoney
 bq query \
 --use_legacy_sql=false \
 'CREATE OR REPLACE MODEL `crypto-sentiment-341504.crypto_sentiment.bitcoin_model`
