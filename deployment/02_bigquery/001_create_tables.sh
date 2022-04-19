@@ -1,4 +1,5 @@
 # Create dataset
+# Marc Meier-Dornburg
 bq mk crypto_sentiment
 
 # bq rm --table=true crypto-sentiment-341504:crypto_sentiment.tmp
