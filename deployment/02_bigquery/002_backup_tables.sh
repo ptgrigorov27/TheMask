@@ -1,3 +1,4 @@
+# Marc Meier-Dornburg
 bq query \
 --destination_table crypto-sentiment-341504:crypto_sentiment.backup_tweets_prepared \
 --use_legacy_sql=false \
