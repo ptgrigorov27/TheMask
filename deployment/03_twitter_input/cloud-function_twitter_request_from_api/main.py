@@ -1,3 +1,4 @@
+# Gabrielle Stoney, Marc Meier-Dornberg
 import base64
 #from distutils.command.config import config
 import json

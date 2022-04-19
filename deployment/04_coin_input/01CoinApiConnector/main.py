@@ -1,3 +1,5 @@
+# Gabrielle Stoney, Khilna Rawal, Marc Meier-Dornberg
+
 import base64
 import json
 import os

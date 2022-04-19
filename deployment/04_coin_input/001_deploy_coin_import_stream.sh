@@ -1,5 +1,6 @@
+# Marc Meier-Dornberg
+
 # Create PubSub topics and subscriptions 
-# Marc Meier-Dornburg
 gcloud pubsub topics create coin-trigger
 gcloud pubsub subscriptions create coin-trigger-sub --topic coin-trigger
 

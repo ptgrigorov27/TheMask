@@ -1,5 +1,5 @@
 # Create a service account for PubSub
-# Marc Meier-Dornburg
+# Marc Meier-Dornberg
 
 gcloud iam service-accounts create service-pubsub \
     --description="Service account for PubSub" \

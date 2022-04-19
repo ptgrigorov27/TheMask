@@ -1,5 +1,6 @@
+# Marc Meier-Dornberg
+
 # Create PubSub topics and subscriptions 
-# Marc Meier-Dornburg
 gcloud pubsub topics create twitter-trigger
 gcloud pubsub subscriptions create twitter-trigger-sub --topic twitter-trigger
 

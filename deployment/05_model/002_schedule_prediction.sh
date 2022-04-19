@@ -1,5 +1,5 @@
 # schedule query to predict every hour
-# Marian Marin, Marc Meier-Dornburg, Gabrielle Stoney
+# Marian Marin, Marc Meier-Dornberg, Gabrielle Stoney
 bq query \
     --use_legacy_sql=false \
     --destination_table=crypto_sentiment.model_output \

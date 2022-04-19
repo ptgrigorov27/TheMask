@@ -1,7 +1,7 @@
 # Create the view tweets_filtered from tweets_prepared
 # The view filteres out tweets without a sentiment score and tweets in another language than English
 # so that the view only contains useful sentiment scores
-# Marc Meier-Dornburg
+# Marc Meier-Dornberg
 bq mk \
     --use_legacy_sql=false \
     --expiration 0 \

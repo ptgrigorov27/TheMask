@@ -1,7 +1,7 @@
 # Create the table bitcoin_sentiments_consolidated from bitcoin_ohlcv and tweets_filtered
 # The table bitcoin_sentiments_consolidated aggregates the data from the two bitcoin_ohlcv and tweets_filtered
 # The query run every hour and rewrite the table
-# Marc Meier-Dornburg
+# Marc Meier-Dornberg
 bq query \
     --use_legacy_sql=false \
     --destination_table=crypto_sentiment.bitcoin_sentiments_consolidated \
